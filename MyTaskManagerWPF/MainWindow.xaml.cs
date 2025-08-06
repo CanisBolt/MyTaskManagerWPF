@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Resources;
 using System.Reflection;
 using System.IO;
+using System.Windows.Media;
 
 namespace MyTaskManagerWPF
 {
@@ -14,12 +15,12 @@ namespace MyTaskManagerWPF
     {
         ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
         const string SaveDirectory = "Saves";
-        TaskManagerData taskManagerData = new TaskManagerData();
+        public TaskManagerData taskManagerData { get; set; } = new TaskManagerData();
 
         public MainWindow()
         {
             InitializeComponent();
-
+            this.DataContext = this;
             if (!Directory.Exists(SaveDirectory))
             {
                 Directory.CreateDirectory(SaveDirectory);
@@ -37,13 +38,37 @@ namespace MyTaskManagerWPF
 
         private void btnAddTask_Click(object sender, RoutedEventArgs e)
         {
-            taskManagerData.ActiveTasks.Add(new UserTask(tbName.Text, tbDescription.Text, DateTime.Now, UserTask.Priority.Высокая));
+            ResetFiledColor();
+
+            string name = tbName.Text;
+            if(name.Length == 0)
+            {
+                MessageBox.Show(resourceManager.GetString("TaskNameCannotBeEmpty"));
+                tbName.Background = Brushes.Red;
+                return;
+            }
+
+            string description = tbDescription.Text;
+            if (description.Length == 0)
+            {
+                MessageBox.Show(resourceManager.GetString("TaskDescriptionCannotBeEmpty"));
+                tbDescription.Background = Brushes.Red;
+                return;
+            }
+
+            taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.Priority.Высокая));
             MessageBox.Show(resourceManager.GetString("TaskSuccessfullyAdded"));
         }
 
         private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Clicked Delete Task!");
+            MessageBox.Show(resourceManager.GetString("TaskSuccessfullyDeleted"));
+        }
+
+        private void ResetFiledColor()
+        {
+            tbName.Background = Brushes.White;
+            tbDescription.Background = Brushes.White;
         }
     }
 }

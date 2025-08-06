@@ -19,6 +19,7 @@
             <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
             <TextBox x:Name="tbName"></TextBox>
             <TextBox x:Name="tbDescription"></TextBox>
+            <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
         </StackPanel>
         <ListView Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">
             <ListView.View>
@@ -26,7 +27,7 @@
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Текст" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Дата Создание" DisplayMemberBinding="{Binding Created}"/>
-                    <GridViewColumn Header="Приоритет" DisplayMemberBinding="{Binding Priority}"/>
+                    <GridViewColumn Header="Приоритет" DisplayMemberBinding="{Binding TaskPriority}"/>
                 </GridView>
             </ListView.View>
         </ListView>
