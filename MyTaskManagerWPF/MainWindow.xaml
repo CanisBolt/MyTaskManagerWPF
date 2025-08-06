@@ -1,0 +1,34 @@
+﻿<Window x:Class="MyTaskManagerWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyTaskManagerWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <Button x:Name="btnAddTask" Content="Добавить задачу" Margin="0,5" Click="btnAddTask_Click"/>
+            <Button x:Name="btnEditTask" Content="Редактировать задачу" Margin="0,5"/>
+            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5" Click="btnDeleteTask_Click"/>
+            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5"/>
+            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
+            <TextBox x:Name="tbName"></TextBox>
+            <TextBox x:Name="tbDescription"></TextBox>
+        </StackPanel>
+        <ListView Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Текст" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Дата Создание" DisplayMemberBinding="{Binding Created}"/>
+                    <GridViewColumn Header="Приоритет" DisplayMemberBinding="{Binding Priority}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
