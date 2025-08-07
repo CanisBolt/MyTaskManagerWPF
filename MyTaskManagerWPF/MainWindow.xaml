@@ -17,22 +17,31 @@
             <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5" Click="btnDeleteTask_Click"/>
             <Button x:Name="btnSave" Content="Сохранить" Margin="0,5"/>
             <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
+            
+            <!-- Separate this to different place -->
+            <Label>Название задачи</Label>
             <TextBox x:Name="tbName"></TextBox>
+            <Label>Текст задачи</Label>
             <TextBox x:Name="tbDescription"></TextBox>
+            <Label>Приортитет задачи</Label>
             <ComboBox x:Name="cbPriority">
                 <ComboBoxItem>Низкая</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">Средняя</ComboBoxItem>
                 <ComboBoxItem>Высокая</ComboBoxItem>
                 <ComboBoxItem>Срочная</ComboBoxItem>
             </ComboBox>
+            <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">
+                <ComboBoxItem IsSelected="True">Русский(Russian)</ComboBoxItem>
+                <ComboBoxItem>Английский(English)</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
         <ListView x:Name="lvTasks" Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Текст" DisplayMemberBinding="{Binding Description}"/>
-                    <GridViewColumn Header="Дата Создание" DisplayMemberBinding="{Binding Created}"/>
-                    <GridViewColumn Header="Приоритет" DisplayMemberBinding="{Binding TaskPriority}"/>
+                    <GridViewColumn Header="Название" Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Текст" Width="auto" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Дата Создание" Width="auto" DisplayMemberBinding="{Binding Created}"/>
+                    <GridViewColumn Header="Приоритет" Width="auto" DisplayMemberBinding="{Binding TaskPriority}"/>
                 </GridView>
             </ListView.View>
         </ListView>

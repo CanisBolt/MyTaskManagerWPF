@@ -5,6 +5,8 @@ using System.Resources;
 using System.Reflection;
 using System.IO;
 using System.Windows.Media;
+using System.Windows.Controls;
+using System.Globalization;
 
 namespace MyTaskManagerWPF
 {
@@ -26,15 +28,6 @@ namespace MyTaskManagerWPF
                 Directory.CreateDirectory(SaveDirectory);
             }
         }
-        /*
-        void ChangeLanguage()
-        {
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
-            string cultureName = Thread.CurrentThread.CurrentUICulture.NativeName;
-            Console.WriteLine(string.Format(resourceManager.GetString("LanguageChangedSuccessfully"), cultureName));
-        }
-        */
 
         private void btnAddTask_Click(object sender, RoutedEventArgs e)
         {
@@ -85,6 +78,29 @@ namespace MyTaskManagerWPF
         {
             tbName.Background = Brushes.White;
             tbDescription.Background = Brushes.White;
+        }
+
+        private void cbLanguage_DropDownClosed(object sender, SelectionChangedEventArgs e)
+        {
+            // TODO Horrible implementation. Change it ASAP
+            ComboBoxItem selectedText = (ComboBoxItem)cbLanguage.SelectedItem;
+            string language;
+            if (selectedText.Content == null)
+            {
+                CultureInfo ci = CultureInfo.InstalledUICulture;
+                return;
+            }
+            else language = selectedText.Content.ToString();
+            if(language.Equals("Русский(Russian)"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
+                return;
+            }
+            if(language.Equals("Английский(English)"))
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                return;
+            }    
         }
     }
 }
