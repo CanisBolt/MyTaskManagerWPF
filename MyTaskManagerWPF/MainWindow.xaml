@@ -19,9 +19,14 @@
             <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
             <TextBox x:Name="tbName"></TextBox>
             <TextBox x:Name="tbDescription"></TextBox>
-            <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
+            <ComboBox x:Name="cbPriority">
+                <ComboBoxItem>Низкая</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Средняя</ComboBoxItem>
+                <ComboBoxItem>Высокая</ComboBoxItem>
+                <ComboBoxItem>Срочная</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
-        <ListView Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">
+        <ListView x:Name="lvTasks" Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>

@@ -31,17 +31,17 @@ namespace MyTaskManager
             IsCompleted = true;
         }
 
-        public static Priority GetTaskPriority(int priority)
+        public static Priority GetTaskPriority(string priority)
         {
             switch (priority)
             {
-                case 0:
+                case "Низкая":
                     return Priority.Низкая;
-                case 1:
+                case "Средняя":
                     return Priority.Средняя;
-                case 2:
+                case "Высокая":
                     return Priority.Высокая;
-                case 3:
+                case "Срочная":
                     return Priority.Срочная;
                 default:
                     return Priority.Средняя;

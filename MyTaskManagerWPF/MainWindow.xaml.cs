@@ -55,14 +55,30 @@ namespace MyTaskManagerWPF
                 tbDescription.Background = Brushes.Red;
                 return;
             }
+            string taskPriority = cbPriority.SelectionBoxItem.ToString();
 
-            taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.Priority.Высокая));
+            taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.GetTaskPriority(taskPriority)));
+            ResetFiledValue();
             MessageBox.Show(resourceManager.GetString("TaskSuccessfullyAdded"));
         }
 
         private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(resourceManager.GetString("TaskSuccessfullyDeleted"));
+            if(lvTasks.SelectedItem != null)
+            {
+                MessageBoxResult result = MessageBox.Show(resourceManager.GetString("DeleteTask"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    taskManagerData.ActiveTasks.Remove((UserTask)lvTasks.SelectedItem);
+                    MessageBox.Show(resourceManager.GetString("TaskSuccessfullyDeleted"));
+                }
+            }
+        }
+
+        private void ResetFiledValue()
+        {
+            tbName.Text = string.Empty;
+            tbDescription.Text = string.Empty;
         }
 
         private void ResetFiledColor()

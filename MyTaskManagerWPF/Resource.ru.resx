@@ -156,8 +156,8 @@
   <data name="DeleteActiveOrArchive" xml:space="preserve">
     <value>Введите 1 для удаления активных задач, 2 для удаления архивных задач: </value>
   </data>
-  <data name="ChooseTaskToDelete" xml:space="preserve">
-    <value>Введите порядковый номер задачи, которую хотите удалить. (Для отмены введите 0): </value>
+  <data name="DeleteTask" xml:space="preserve">
+    <value>Вы желаете удалить данную задачу?</value>
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
     <value>Задача успешно удалена!</value>
@@ -269,5 +269,8 @@
   </data>
   <data name="NoAnswer" xml:space="preserve">
     <value>Нет</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Внимание!</value>
   </data>
 </root>
