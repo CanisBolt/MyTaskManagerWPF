@@ -19,20 +19,20 @@
             <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
             
             <!-- Separate this to different place -->
-            <Label>Название задачи</Label>
+            <Label x:Name="lblTaskName">Название задачи</Label>
             <TextBox x:Name="tbName"></TextBox>
-            <Label>Текст задачи</Label>
+            <Label x:Name="lblTaskText">Текст задачи</Label>
             <TextBox x:Name="tbDescription"></TextBox>
-            <Label>Приортитет задачи</Label>
+            <Label x:Name="lblTaskPriority">Приортитет задачи</Label>
             <ComboBox x:Name="cbPriority">
-                <ComboBoxItem>Низкая</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Средняя</ComboBoxItem>
-                <ComboBoxItem>Высокая</ComboBoxItem>
-                <ComboBoxItem>Срочная</ComboBoxItem>
+                <ComboBoxItem Content="Низкая"></ComboBoxItem>
+                <ComboBoxItem Content="Средняя" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="Высокая"></ComboBoxItem>
+                <ComboBoxItem Content="Срочная"></ComboBoxItem>
             </ComboBox>
             <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">
-                <ComboBoxItem IsSelected="True">Русский(Russian)</ComboBoxItem>
-                <ComboBoxItem>Английский(English)</ComboBoxItem>
+                <ComboBoxItem Content="Русский" Tag="ru-RU" IsSelected="True"/>
+                <ComboBoxItem Content="English" Tag="en-US"/>
             </ComboBox>
         </StackPanel>
         <ListView x:Name="lvTasks" Grid.Column="1" Margin="10" ItemsSource="{Binding taskManagerData.ActiveTasks}">

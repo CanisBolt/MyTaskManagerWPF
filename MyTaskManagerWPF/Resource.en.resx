@@ -273,4 +273,28 @@
   <data name="Warning" xml:space="preserve">
     <value>Warning!</value>
   </data>
+  <data name="ButtonAddTask" xml:space="preserve">
+    <value>Add task</value>
+  </data>
+  <data name="ButtonEditTask" xml:space="preserve">
+    <value>Edit task</value>
+  </data>
+  <data name="ButtonDeleteTask" xml:space="preserve">
+    <value>Delete task</value>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ButtonLoad" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="LabelTaskName" xml:space="preserve">
+    <value>Task name</value>
+  </data>
+  <data name="LabelTaskDescription" xml:space="preserve">
+    <value>Task text</value>
+  </data>
+  <data name="LabelTaskPriority" xml:space="preserve">
+    <value>Task priority</value>
+  </data>
 </root>

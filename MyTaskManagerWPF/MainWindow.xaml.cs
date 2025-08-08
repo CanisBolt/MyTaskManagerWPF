@@ -82,25 +82,23 @@ namespace MyTaskManagerWPF
 
         private void cbLanguage_DropDownClosed(object sender, SelectionChangedEventArgs e)
         {
-            // TODO Horrible implementation. Change it ASAP
-            ComboBoxItem selectedText = (ComboBoxItem)cbLanguage.SelectedItem;
-            string language;
-            if (selectedText.Content == null)
+            ComboBoxItem selectedItem = (ComboBoxItem)cbLanguage.SelectedItem;
+            if (selectedItem != null)
             {
-                CultureInfo ci = CultureInfo.InstalledUICulture;
-                return;
+                string cultureName = (string)selectedItem.Tag;
+
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+
+                btnAddTask.Content = resourceManager.GetString("ButtonAddTask");
+                btnEditTask.Content = resourceManager.GetString("ButtonEditTask");
+                btnDeleteTask.Content = resourceManager.GetString("ButtonDeleteTask");
+                btnLoad.Content = resourceManager.GetString("ButtonLoad");
+                btnSave.Content = resourceManager.GetString("ButtonSave");
+
+                lblTaskName.Content = resourceManager.GetString("LabelTaskName");
+                lblTaskText.Content = resourceManager.GetString("LabelTaskDescription");
+                lblTaskPriority.Content = resourceManager.GetString("LabelTaskPriority");
             }
-            else language = selectedText.Content.ToString();
-            if(language.Equals("Русский(Russian)"))
-            {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
-                return;
-            }
-            if(language.Equals("Английский(English)"))
-            {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                return;
-            }    
         }
     }
 }
