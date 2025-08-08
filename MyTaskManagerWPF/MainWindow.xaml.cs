@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Globalization;
+using System.Xml.Linq;
 
 namespace MyTaskManagerWPF
 {
@@ -98,6 +99,23 @@ namespace MyTaskManagerWPF
                 lblTaskName.Content = resourceManager.GetString("LabelTaskName");
                 lblTaskText.Content = resourceManager.GetString("LabelTaskDescription");
                 lblTaskPriority.Content = resourceManager.GetString("LabelTaskPriority");
+            }
+        }
+
+        private void btnEditTask_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO It works, but not sure how good it'll be. Rewrite it later for sure.
+            if (lvTasks.SelectedItem != null)
+            {
+                UserTask task = (UserTask)lvTasks.SelectedItem;
+
+                EditTaskWindow editTaskWindow = new EditTaskWindow(task);
+                if(editTaskWindow.ShowDialog() == true)
+                {
+                    taskManagerData.ActiveTasks.Remove(task);
+                    task = new UserTask(editTaskWindow.tbName.Text, editTaskWindow.tbDescription.Text, DateTime.Now, UserTask.GetTaskPriority(editTaskWindow.cbPriority.Text.ToString()));
+                    taskManagerData.ActiveTasks.Add(task);
+                }
             }
         }
     }

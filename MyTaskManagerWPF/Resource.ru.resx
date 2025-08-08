@@ -297,4 +297,10 @@
   <data name="LabelTaskPriority" xml:space="preserve">
     <value>Приоритет задачи</value>
   </data>
+  <data name="ButtonApply" xml:space="preserve">
+    <value>Принять</value>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
 </root>
