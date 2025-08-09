@@ -1,0 +1,17 @@
+﻿<Window x:Class="MyTaskManagerWPF.SaveWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyTaskManagerWPF"
+        mc:Ignorable="d"
+        Title="SaveWindow" Height="200" Width="200">
+    <Grid>
+        <StackPanel>
+            <Label x:Name="lblSaveName" Content="Ввдетие имя файла" Margin="0,5" HorizontalAlignment="Center"></Label>
+            <TextBox x:Name="tbSaveName" Margin="0,5"></TextBox>
+            <Button x:Name="btnEditApply" Content="" Margin="0,5" Click="btnEditApply_Click"/>
+            <Button x:Name="btnEditCancel" Content="" Margin="0,5" Click="btnEditCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

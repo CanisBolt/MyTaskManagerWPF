@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Xml.Linq;
+using Microsoft.Win32;
 
 namespace MyTaskManagerWPF
 {
@@ -115,6 +116,137 @@ namespace MyTaskManagerWPF
                     taskManagerData.ActiveTasks.Remove(task);
                     task = new UserTask(editTaskWindow.tbName.Text, editTaskWindow.tbDescription.Text, DateTime.Now, UserTask.GetTaskPriority(editTaskWindow.cbPriority.Text.ToString()));
                     taskManagerData.ActiveTasks.Add(task);
+                }
+            }
+        }
+
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string saveName;
+            if (!taskManagerData.ActiveTasks.Any())
+            {
+                MessageBox.Show(resourceManager.GetString("NoTasksFound"));
+                return;
+            }
+
+            SaveWindow save = new SaveWindow();
+            if (save.ShowDialog() == true)
+            {
+                saveName = save.tbSaveName.Text;
+                saveName += ".json";
+            }
+            else return;
+
+
+            string fullSavePath = Path.Combine(SaveDirectory, saveName); 
+            
+            if (File.Exists(fullSavePath))
+            {
+                MessageBoxResult result = MessageBox.Show(resourceManager.GetString("FileExistsOverwriteWarning"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    await Saving(fullSavePath);
+                }
+                else
+                {
+                    MessageBox.Show(resourceManager.GetString("SaveCancelled"));
+                    return;
+                }
+            }
+            else
+            {
+                await Saving(fullSavePath);
+            }
+            MessageBox.Show(resourceManager.GetString("TasksSuccessfullySaved"));
+        }
+
+        async Task Saving(string fullSavePath)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(taskManagerData, new JsonSerializerOptions { WriteIndented = true });
+                await File.WriteAllTextAsync(fullSavePath, json);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show(string.Format(resourceManager.GetString("ErrorFileNotFound"), Path.GetFileName(fullSavePath)));
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show(resourceManager.GetString("ErrorCorruptedJson"));
+                MessageBox.Show(resourceManager.GetString("ErrorDetails"));
+                taskManagerData = new TaskManagerData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(resourceManager.GetString("ErrorGeneric"));
+            }
+        }
+
+
+        private async void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            string saveName;
+            string dirName = SaveDirectory;
+            if (Directory.Exists(dirName))
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Saves");
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    saveName = openFileDialog.FileName;
+                    if (taskManagerData.ActiveTasks.Any() || taskManagerData.ArchiveTasks.Any())
+                    {
+                        MessageBoxResult result = MessageBox.Show(resourceManager.GetString("CurrentDataWillBeErased"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.No)
+                        {
+                            MessageBox.Show(resourceManager.GetString("LoadCancelled"));
+                            return;
+                        }
+                    }
+
+                    try
+                    {
+                        string json = await File.ReadAllTextAsync(saveName);
+                        if (string.IsNullOrWhiteSpace(json))
+                        {
+                            MessageBox.Show(resourceManager.GetString("LoadErrorFileEmpty"));
+                            taskManagerData = new TaskManagerData();
+                            return;
+                        }
+                        var loadedData = JsonSerializer.Deserialize<TaskManagerData>(json);
+                        if (loadedData == null)
+                        {
+                            MessageBox.Show(resourceManager.GetString("LoadFailed"));
+                            return;
+                        }
+                        taskManagerData.ActiveTasks.Clear();
+                        taskManagerData.ArchiveTasks.Clear();
+                        foreach (var task in loadedData.ActiveTasks)
+                        {
+                            taskManagerData.ActiveTasks.Add(task);
+                        }
+                        foreach (var task in loadedData.ArchiveTasks)
+                        {
+                            taskManagerData.ArchiveTasks.Add(task);
+                        }
+                        MessageBox.Show(resourceManager.GetString("DataLoadedSuccessfully"));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show(resourceManager.GetString("ErrorFileNotFound"));
+                    }
+                    catch (JsonException ex)
+                    {
+                        MessageBox.Show(resourceManager.GetString("ErrorCorruptedJson"));
+                        MessageBox.Show(resourceManager.GetString("ErrorDetails"));
+                        taskManagerData = new TaskManagerData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(resourceManager.GetString("ErrorGeneric"));
+                    }
                 }
             }
         }

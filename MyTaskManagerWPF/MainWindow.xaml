@@ -15,8 +15,8 @@
             <Button x:Name="btnAddTask" Content="Добавить задачу" Margin="0,5" Click="btnAddTask_Click"/>
             <Button x:Name="btnEditTask" Content="Редактировать задачу" Margin="0,5" Click="btnEditTask_Click"/>
             <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5" Click="btnDeleteTask_Click"/>
-            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5"/>
-            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
+            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5" Click="btnSave_Click"/>
+            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5" Click="btnLoad_Click"/>
             
             <!-- Separate this to different place -->
             <Label x:Name="lblTaskName">Название задачи</Label>
