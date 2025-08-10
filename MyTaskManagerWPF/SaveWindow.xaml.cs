@@ -22,6 +22,8 @@ namespace MyTaskManagerWPF
     public partial class SaveWindow : Window
     {
         ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
+
+        public string SaveFileName { get; private set; }
         public SaveWindow()
         {
             InitializeComponent();
@@ -37,7 +39,8 @@ namespace MyTaskManagerWPF
                 MessageBox.Show(resourceManager.GetString("SaveFileNameTooShort"));
                 return;
             }
-            
+
+            SaveFileName = tbSaveName.Text;
             GetWindow(this).DialogResult = true;
             GetWindow(this).Close();
         }

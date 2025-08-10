@@ -114,7 +114,7 @@ namespace MyTaskManagerWPF
                 if(editTaskWindow.ShowDialog() == true)
                 {
                     taskManagerData.ActiveTasks.Remove(task);
-                    task = new UserTask(editTaskWindow.tbName.Text, editTaskWindow.tbDescription.Text, DateTime.Now, UserTask.GetTaskPriority(editTaskWindow.cbPriority.Text.ToString()));
+                    task = new UserTask(editTaskWindow.Name, editTaskWindow.Description, DateTime.Now, UserTask.GetTaskPriority(editTaskWindow.Priority));
                     taskManagerData.ActiveTasks.Add(task);
                 }
             }
@@ -132,7 +132,7 @@ namespace MyTaskManagerWPF
             SaveWindow save = new SaveWindow();
             if (save.ShowDialog() == true)
             {
-                saveName = save.tbSaveName.Text;
+                saveName = save.SaveFileName;
                 saveName += ".json";
             }
             else return;

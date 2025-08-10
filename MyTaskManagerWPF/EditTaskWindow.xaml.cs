@@ -23,6 +23,9 @@ namespace MyTaskManagerWPF
     public partial class EditTaskWindow : Window
     {
         ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string Priority { get; private set; }
         public EditTaskWindow(UserTask task)
         {
             InitializeComponent();
@@ -37,6 +40,10 @@ namespace MyTaskManagerWPF
 
         private void btnEditApply_Click(object sender, RoutedEventArgs e)
         {
+            Name = tbName.Text;
+            Description = tbDescription.Text;
+            Priority = cbPriority.Text;
+
             GetWindow(this).DialogResult = true;
             GetWindow(this).Close();
         }
