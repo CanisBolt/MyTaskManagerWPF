@@ -1,4 +1,4 @@
-﻿using MyTaskManager;
+﻿using MyTaskManagerWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MyTaskManagerWPF
+namespace MyTaskManagerWPF.View
 {
     /// <summary>
     /// Interaction logic for EditTaskWindow.xaml

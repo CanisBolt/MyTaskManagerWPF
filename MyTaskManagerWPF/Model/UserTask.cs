@@ -1,6 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
-namespace MyTaskManager
+namespace MyTaskManagerWPF.Model
 {
     public class UserTask
     {

@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MyTaskManagerWPF
+namespace MyTaskManagerWPF.View
 {
     /// <summary>
     /// Interaction logic for SaveWindow.xaml

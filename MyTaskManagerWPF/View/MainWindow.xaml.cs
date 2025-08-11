@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using MyTaskManager;
 using System.Text.Json;
 using System.Resources;
 using System.Reflection;
@@ -9,8 +8,10 @@ using System.Windows.Controls;
 using System.Globalization;
 using System.Xml.Linq;
 using Microsoft.Win32;
+using MyTaskManagerWPF.Model;
+using MyTaskManagerWPF.ViewModel;
 
-namespace MyTaskManagerWPF
+namespace MyTaskManagerWPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -19,12 +20,13 @@ namespace MyTaskManagerWPF
     {
         ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
         const string SaveDirectory = "Saves";
+        TaskManagerVM taskManagerVM = new TaskManagerVM();
         public TaskManagerData taskManagerData { get; set; } = new TaskManagerData();
 
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = taskManagerVM;
             if (!Directory.Exists(SaveDirectory))
             {
                 Directory.CreateDirectory(SaveDirectory);
@@ -52,7 +54,7 @@ namespace MyTaskManagerWPF
             }
             string taskPriority = cbPriority.SelectionBoxItem.ToString();
 
-            taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.GetTaskPriority(taskPriority)));
+            //taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.GetTaskPriority(taskPriority)));
             ResetFiledValue();
             MessageBox.Show(resourceManager.GetString("TaskSuccessfullyAdded"));
         }
@@ -64,7 +66,7 @@ namespace MyTaskManagerWPF
                 MessageBoxResult result = MessageBox.Show(resourceManager.GetString("DeleteTask"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    taskManagerData.ActiveTasks.Remove((UserTask)lvTasks.SelectedItem);
+                    //taskManagerData.ActiveTasks.Remove((UserTask)lvTasks.SelectedItem);
                     MessageBox.Show(resourceManager.GetString("TaskSuccessfullyDeleted"));
                 }
             }
@@ -113,22 +115,22 @@ namespace MyTaskManagerWPF
                 EditTaskWindow editTaskWindow = new EditTaskWindow(task);
                 if(editTaskWindow.ShowDialog() == true)
                 {
-                    taskManagerData.ActiveTasks.Remove(task);
+                    //taskManagerData.ActiveTasks.Remove(task);
                     task = new UserTask(editTaskWindow.Name, editTaskWindow.Description, DateTime.Now, UserTask.GetTaskPriority(editTaskWindow.Priority));
-                    taskManagerData.ActiveTasks.Add(task);
+                    //taskManagerData.ActiveTasks.Add(task);
                 }
             }
         }
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string saveName;
+            string saveName;/*
             if (!taskManagerData.ActiveTasks.Any())
             {
                 MessageBox.Show(resourceManager.GetString("NoTasksFound"));
                 return;
             }
-
+            */
             SaveWindow save = new SaveWindow();
             if (save.ShowDialog() == true)
             {
@@ -185,7 +187,7 @@ namespace MyTaskManagerWPF
 
 
         private async void btnLoad_Click(object sender, RoutedEventArgs e)
-        {
+        {/*
             string saveName;
             string dirName = SaveDirectory;
             if (Directory.Exists(dirName))
@@ -196,6 +198,7 @@ namespace MyTaskManagerWPF
                 if (openFileDialog.ShowDialog() == true)
                 {
                     saveName = openFileDialog.FileName;
+
                     if (taskManagerData.ActiveTasks.Any() || taskManagerData.ArchiveTasks.Any())
                     {
                         MessageBoxResult result = MessageBox.Show(resourceManager.GetString("CurrentDataWillBeErased"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -249,6 +252,7 @@ namespace MyTaskManagerWPF
                     }
                 }
             }
+            */
         }
     }
 }
