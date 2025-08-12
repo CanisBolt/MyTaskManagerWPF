@@ -21,7 +21,6 @@ namespace MyTaskManagerWPF.View
         ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
         const string SaveDirectory = "Saves";
         TaskManagerVM taskManagerVM = new TaskManagerVM();
-        public TaskManagerData taskManagerData { get; set; } = new TaskManagerData();
 
         public MainWindow()
         {
@@ -33,6 +32,7 @@ namespace MyTaskManagerWPF.View
             }
         }
 
+        /*
         private void btnAddTask_Click(object sender, RoutedEventArgs e)
         {
             ResetFiledColor();
@@ -71,19 +71,7 @@ namespace MyTaskManagerWPF.View
                 }
             }
         }
-
-        private void ResetFiledValue()
-        {
-            tbName.Text = string.Empty;
-            tbDescription.Text = string.Empty;
-        }
-
-        private void ResetFiledColor()
-        {
-            tbName.Background = Brushes.White;
-            tbDescription.Background = Brushes.White;
-        }
-
+        */
         private void cbLanguage_DropDownClosed(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)cbLanguage.SelectedItem;
@@ -98,13 +86,9 @@ namespace MyTaskManagerWPF.View
                 btnDeleteTask.Content = resourceManager.GetString("ButtonDeleteTask");
                 btnLoad.Content = resourceManager.GetString("ButtonLoad");
                 btnSave.Content = resourceManager.GetString("ButtonSave");
-
-                lblTaskName.Content = resourceManager.GetString("LabelTaskName");
-                lblTaskText.Content = resourceManager.GetString("LabelTaskDescription");
-                lblTaskPriority.Content = resourceManager.GetString("LabelTaskPriority");
             }
         }
-
+        /*
         private void btnEditTask_Click(object sender, RoutedEventArgs e)
         {
             // TODO It works, but not sure how good it'll be. Rewrite it later for sure.
@@ -121,16 +105,14 @@ namespace MyTaskManagerWPF.View
                 }
             }
         }
-
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string saveName;/*
+            string saveName;
             if (!taskManagerData.ActiveTasks.Any())
             {
                 MessageBox.Show(resourceManager.GetString("NoTasksFound"));
                 return;
             }
-            */
             SaveWindow save = new SaveWindow();
             if (save.ShowDialog() == true)
             {
@@ -185,9 +167,8 @@ namespace MyTaskManagerWPF.View
             }
         }
 
-
         private async void btnLoad_Click(object sender, RoutedEventArgs e)
-        {/*
+        {
             string saveName;
             string dirName = SaveDirectory;
             if (Directory.Exists(dirName))
@@ -253,6 +234,5 @@ namespace MyTaskManagerWPF.View
                 }
             }
             */
-        }
     }
 }

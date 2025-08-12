@@ -1,5 +1,4 @@
-﻿using MyTaskManagerWPF.Model;
-using MyTaskManagerWPF.ViewModel;
+﻿using MyTaskManagerWPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +18,13 @@ namespace MyTaskManagerWPF.View
     /// <summary>
     /// Interaction logic for AddTaskWindow.xaml
     /// </summary>
-    public partial class EditTaskWindow : Window
+    public partial class AddTaskWindow : Window
     {
-        EditTaskVM editTaskVM = new EditTaskVM();
-        public EditTaskWindow(UserTask task)
+        AddTaskVM addTaskVM = new AddTaskVM();
+        public AddTaskWindow()
         {
             InitializeComponent();
-            this.DataContext = editTaskVM;
+            this.DataContext = addTaskVM;
         }
 
 

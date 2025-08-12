@@ -12,24 +12,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10">
-            <Button x:Name="btnAddTask" Content="Добавить задачу" Margin="0,5" Click="btnAddTask_Click"/>
-            <Button x:Name="btnEditTask" Content="Редактировать задачу" Margin="0,5" Click="btnEditTask_Click"/>
-            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5" Click="btnDeleteTask_Click"/>
-            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5" Click="btnSave_Click"/>
-            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5" Click="btnLoad_Click"/>
+            <Button x:Name="btnAddTask" Command="{Binding ShowAddWindowCommand}" Content="Добавить задачу" Margin="0,5"/>
+            <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" Content="Редактировать задачу" Margin="0,5"/>
+            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5"/>
+            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5"/>
+            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
             
-            <!-- Separate this to different place -->
-            <Label x:Name="lblTaskName">Название задачи</Label>
-            <TextBox x:Name="tbName"></TextBox>
-            <Label x:Name="lblTaskText">Текст задачи</Label>
-            <TextBox x:Name="tbDescription"></TextBox>
-            <Label x:Name="lblTaskPriority">Приортитет задачи</Label>
-            <ComboBox x:Name="cbPriority">
-                <ComboBoxItem Content="Низкая"></ComboBoxItem>
-                <ComboBoxItem Content="Средняя" IsSelected="True"></ComboBoxItem>
-                <ComboBoxItem Content="Высокая"></ComboBoxItem>
-                <ComboBoxItem Content="Срочная"></ComboBoxItem>
-            </ComboBox>
             <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">
                 <ComboBoxItem Content="Русский" Tag="ru-RU" IsSelected="True"/>
                 <ComboBoxItem Content="English" Tag="en-US"/>

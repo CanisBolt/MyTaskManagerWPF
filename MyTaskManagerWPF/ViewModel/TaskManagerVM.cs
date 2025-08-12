@@ -17,21 +17,28 @@ namespace MyTaskManagerWPF.ViewModel
         public ObservableCollection<UserTask> ActiveTasks { get; set; }
         public ObservableCollection<UserTask> ArchiveTasks { get; set; }
         public UserTask SelectedTask { get; set; }
-
-        public ICommand ShowWindowCommand { get; set; }
+        public ICommand ShowAddWindowCommand { get; set; }
+        public ICommand ShowEditWindowCommand { get; set; }
 
         public TaskManagerVM()
         {
             ActiveTasks = TaskManagerData.GetActiveTasks();
             ArchiveTasks = TaskManagerData.GetArchiveTasks();
 
-            ShowWindowCommand = new RelayCommands(ShowWindow, CanShowWindow);
+            ShowAddWindowCommand = new RelayCommands(ShowAddWindow, CanShowWindow);
+            ShowEditWindowCommand = new RelayCommands(ShowEditWindow, CanShowWindow);
         }
 
-        private void ShowWindow(object obj)
+        private void ShowAddWindow(object obj)
         {
-            MainWindow addTaskWindow = new MainWindow();
+            AddTaskWindow addTaskWindow = new AddTaskWindow();
             addTaskWindow.Show();
+        }
+
+        private void ShowEditWindow(object obj)
+        {
+            EditTaskWindow editTaskWindow = new EditTaskWindow((UserTask)obj);
+            editTaskWindow.Show();
         }
 
         private bool CanShowWindow(object obj)
