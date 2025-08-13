@@ -11,19 +11,29 @@ namespace MyTaskManagerWPF.ViewModel
 {
     public class EditTaskVM
     {
+        private readonly UserTask _originalTask;
+
         public string Name { get; set; }
         public string Description { get; set; }
         public string TaskPriority { get; set; }
         public ICommand EditTaskCommand { get; set; }
 
-        public EditTaskVM()
+        public EditTaskVM(UserTask task)
         {
+            _originalTask = task;
+
+            Name = task.Name;
+            Description = task.Description;
+            TaskPriority = task.TaskPriority.ToString();
+
             EditTaskCommand = new RelayCommands(EditTask, CanEditTask);
         }
 
         private void EditTask(object obj)
         {
-            TaskManagerData.AddActiveTask(new UserTask(Name, Description, DateTime.Now, UserTask.GetTaskPriority(TaskPriority)));
+            _originalTask.Name = Name;
+            _originalTask.Description = Description;
+            _originalTask.TaskPriority = UserTask.GetTaskPriority(TaskPriority);
         }
 
         private bool CanEditTask(object obj)

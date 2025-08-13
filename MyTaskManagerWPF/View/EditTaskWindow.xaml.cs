@@ -21,25 +21,9 @@ namespace MyTaskManagerWPF.View
     /// </summary>
     public partial class EditTaskWindow : Window
     {
-        EditTaskVM editTaskVM = new EditTaskVM();
-        public EditTaskWindow(UserTask task)
+        public EditTaskWindow()
         {
             InitializeComponent();
-            this.DataContext = editTaskVM;
-        }
-
-
-
-        private void ResetFiledValue()
-        {
-            tbName.Text = string.Empty;
-            tbDescription.Text = string.Empty;
-        }
-
-        private void ResetFiledColor()
-        {
-            tbName.Background = Brushes.White;
-            tbDescription.Background = Brushes.White;
         }
     }
 }

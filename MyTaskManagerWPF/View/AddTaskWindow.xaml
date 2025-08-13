@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="AddTaskWindow" Height="400" Width="300">
     <Grid Height="384" VerticalAlignment="Bottom">
-        <!-- Separate this to different place -->
         <StackPanel>
             <Label x:Name="lblTaskName">Название задачи</Label>
             <TextBox x:Name="tbName" Text="{Binding Name}"></TextBox>

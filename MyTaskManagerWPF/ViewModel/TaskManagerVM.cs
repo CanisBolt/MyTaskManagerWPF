@@ -37,16 +37,18 @@ namespace MyTaskManagerWPF.ViewModel
 
         private void ShowEditWindow(object obj)
         {
-            EditTaskWindow editTaskWindow = new EditTaskWindow((UserTask)obj);
-            editTaskWindow.Show();
+            if (obj is UserTask selectedTask)
+            {
+                EditTaskVM editTaskVM = new EditTaskVM(selectedTask);
+                EditTaskWindow editTaskWindow = new EditTaskWindow();
+                editTaskWindow.DataContext = editTaskVM;
+                editTaskWindow.ShowDialog();
+            }
         }
 
         private bool CanShowWindow(object obj)
         {
             return true;
         }
-
-
-        
     }
 }

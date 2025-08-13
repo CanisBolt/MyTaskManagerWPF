@@ -28,7 +28,6 @@ namespace MyTaskManagerWPF.View
         }
 
 
-
         private void ResetFiledValue()
         {
             tbName.Text = string.Empty;

@@ -18,7 +18,6 @@ namespace MyTaskManagerWPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        ResourceManager resourceManager = new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
         const string SaveDirectory = "Saves";
         TaskManagerVM taskManagerVM = new TaskManagerVM();
 
@@ -31,47 +30,21 @@ namespace MyTaskManagerWPF.View
                 Directory.CreateDirectory(SaveDirectory);
             }
         }
-
-        /*
-        private void btnAddTask_Click(object sender, RoutedEventArgs e)
-        {
-            ResetFiledColor();
-
-            string name = tbName.Text;
-            if(name.Length == 0)
-            {
-                MessageBox.Show(resourceManager.GetString("TaskNameCannotBeEmpty"));
-                tbName.Background = Brushes.Red;
-                return;
-            }
-
-            string description = tbDescription.Text;
-            if (description.Length == 0)
-            {
-                MessageBox.Show(resourceManager.GetString("TaskDescriptionCannotBeEmpty"));
-                tbDescription.Background = Brushes.Red;
-                return;
-            }
-            string taskPriority = cbPriority.SelectionBoxItem.ToString();
-
-            //taskManagerData.ActiveTasks.Add(new UserTask(name, description, DateTime.Now, UserTask.GetTaskPriority(taskPriority)));
-            ResetFiledValue();
-            MessageBox.Show(resourceManager.GetString("TaskSuccessfullyAdded"));
-        }
+        
 
         private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
         {
             if(lvTasks.SelectedItem != null)
             {
-                MessageBoxResult result = MessageBox.Show(resourceManager.GetString("DeleteTask"), resourceManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show(LocalizationManager.GetString("DeleteTask"), LocalizationManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    //taskManagerData.ActiveTasks.Remove((UserTask)lvTasks.SelectedItem);
-                    MessageBox.Show(resourceManager.GetString("TaskSuccessfullyDeleted"));
+                    taskManagerVM.ActiveTasks.Remove((UserTask)lvTasks.SelectedItem);
+                    MessageBox.Show(LocalizationManager.GetString("TaskSuccessfullyDeleted"));
                 }
             }
         }
-        */
+
         private void cbLanguage_DropDownClosed(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)cbLanguage.SelectedItem;
@@ -81,11 +54,11 @@ namespace MyTaskManagerWPF.View
 
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
 
-                btnAddTask.Content = resourceManager.GetString("ButtonAddTask");
-                btnEditTask.Content = resourceManager.GetString("ButtonEditTask");
-                btnDeleteTask.Content = resourceManager.GetString("ButtonDeleteTask");
-                btnLoad.Content = resourceManager.GetString("ButtonLoad");
-                btnSave.Content = resourceManager.GetString("ButtonSave");
+                btnAddTask.Content = LocalizationManager.GetString("ButtonAddTask");
+                btnEditTask.Content = LocalizationManager.GetString("ButtonEditTask");
+                btnDeleteTask.Content = LocalizationManager.GetString("ButtonDeleteTask");
+                btnLoad.Content = LocalizationManager.GetString("ButtonLoad");
+                btnSave.Content = LocalizationManager.GetString("ButtonSave");
             }
         }
         /*
