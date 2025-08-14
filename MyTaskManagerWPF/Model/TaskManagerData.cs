@@ -4,8 +4,8 @@ namespace MyTaskManagerWPF.Model
 {
     public class TaskManagerData
     {
-        private static ObservableCollection<UserTask> ActiveTasks { get; set; } = new ObservableCollection<UserTask>();
-        private static ObservableCollection<UserTask> ArchiveTasks { get; set; } = new ObservableCollection<UserTask>();
+        public static ObservableCollection<UserTask> ActiveTasks { get; set; } = new ObservableCollection<UserTask>();
+        public static ObservableCollection<UserTask> ArchiveTasks { get; set; } = new ObservableCollection<UserTask>();
 
         public TaskManagerData()
         {

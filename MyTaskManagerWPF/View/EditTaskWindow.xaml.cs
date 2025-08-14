@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace MyTaskManagerWPF.View
 {
     /// <summary>
-    /// Interaction logic for AddTaskWindow.xaml
+    /// Interaction logic for EditTaskWindow.xaml
     /// </summary>
     public partial class EditTaskWindow : Window
     {

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,6 +20,9 @@ namespace MyTaskManagerWPF.ViewModel
         public UserTask SelectedTask { get; set; }
         public ICommand ShowAddWindowCommand { get; set; }
         public ICommand ShowEditWindowCommand { get; set; }
+        public ICommand ShowSaveWindowCommand { get; set; }
+
+        public SaveVM SaveViewModel { get; }
 
         public TaskManagerVM()
         {
@@ -27,12 +31,15 @@ namespace MyTaskManagerWPF.ViewModel
 
             ShowAddWindowCommand = new RelayCommands(ShowAddWindow, CanShowWindow);
             ShowEditWindowCommand = new RelayCommands(ShowEditWindow, CanShowWindow);
+            ShowSaveWindowCommand = new RelayCommands(ShowSaveWindow, CanShowWindow);
+
+            SaveViewModel = new SaveVM(this);
         }
 
         private void ShowAddWindow(object obj)
         {
             AddTaskWindow addTaskWindow = new AddTaskWindow();
-            addTaskWindow.Show();
+            addTaskWindow.ShowDialog();
         }
 
         private void ShowEditWindow(object obj)
@@ -44,6 +51,10 @@ namespace MyTaskManagerWPF.ViewModel
                 editTaskWindow.DataContext = editTaskVM;
                 editTaskWindow.ShowDialog();
             }
+        }
+
+        private void ShowSaveWindow(object obj)
+        {
         }
 
         private bool CanShowWindow(object obj)

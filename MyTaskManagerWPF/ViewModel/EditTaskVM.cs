@@ -11,7 +11,7 @@ namespace MyTaskManagerWPF.ViewModel
 {
     public class EditTaskVM
     {
-        private readonly UserTask _originalTask;
+        private UserTask _originalTask;
 
         public string Name { get; set; }
         public string Description { get; set; }

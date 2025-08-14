@@ -31,6 +31,8 @@ namespace MyTaskManagerWPF.View
             lblSaveName.Content = resourceManager.GetString("EnterSaveFileName"); 
             btnEditApply.Content = resourceManager.GetString("ButtonApply");
             btnEditCancel.Content = resourceManager.GetString("ButtonCancel");
+
+
         }
         private void btnEditApply_Click(object sender, RoutedEventArgs e)
         {
