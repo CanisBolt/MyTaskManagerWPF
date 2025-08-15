@@ -1,4 +1,5 @@
-﻿using MyTaskManagerWPF.Commands;
+﻿using Microsoft.Win32;
+using MyTaskManagerWPF.Commands;
 using MyTaskManagerWPF.Model;
 using MyTaskManagerWPF.View;
 using System;
@@ -53,8 +54,9 @@ namespace MyTaskManagerWPF.ViewModel
             }
         }
 
-        private void ShowSaveWindow(object obj)
+        private async void ShowSaveWindow(object obj)
         {
+            await SaveViewModel.SaveTasksToFile();
         }
 
         private bool CanShowWindow(object obj)

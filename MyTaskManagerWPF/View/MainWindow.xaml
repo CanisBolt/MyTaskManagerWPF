@@ -15,7 +15,7 @@
             <Button x:Name="btnAddTask" Command="{Binding ShowAddWindowCommand}" Content="Добавить задачу" Margin="0,5"/>
             <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" CommandParameter="{Binding SelectedTask}" Content="Редактировать задачу" Margin="0,5"/>
             <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5"/>
-            <Button x:Name="btnSave" Content="Сохранить" Margin="0,5" Command="{Binding SaveViewModel.SaveTaskCommand}"/>
+            <Button x:Name="btnSave" Content="Сохранить" Command="{Binding ShowSaveWindowCommand}"/>
             <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
             
             <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">

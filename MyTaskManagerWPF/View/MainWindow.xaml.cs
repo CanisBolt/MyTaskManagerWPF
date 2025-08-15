@@ -57,12 +57,6 @@ namespace MyTaskManagerWPF.View
             }
         }
 
-        private async void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-
-
 
         /*
         private async void btnLoad_Click(object sender, RoutedEventArgs e)
