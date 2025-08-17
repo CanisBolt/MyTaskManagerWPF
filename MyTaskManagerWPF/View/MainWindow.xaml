@@ -16,7 +16,7 @@
             <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" CommandParameter="{Binding SelectedTask}" Content="Редактировать задачу" Margin="0,5"/>
             <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5"/>
             <Button x:Name="btnSave" Content="Сохранить" Command="{Binding ShowSaveWindowCommand}"/>
-            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5"/>
+            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5" Command="{Binding ShowLoadWindowCommand}"/>
             
             <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">
                 <ComboBoxItem Content="Русский" Tag="ru-RU" IsSelected="True"/>

@@ -22,8 +22,10 @@ namespace MyTaskManagerWPF.ViewModel
         public ICommand ShowAddWindowCommand { get; set; }
         public ICommand ShowEditWindowCommand { get; set; }
         public ICommand ShowSaveWindowCommand { get; set; }
+        public ICommand ShowLoadWindowCommand { get; set; }
 
         public SaveVM SaveViewModel { get; }
+        public LoadVM LoadViewModel { get; }
 
         public TaskManagerVM()
         {
@@ -33,8 +35,10 @@ namespace MyTaskManagerWPF.ViewModel
             ShowAddWindowCommand = new RelayCommands(ShowAddWindow, CanShowWindow);
             ShowEditWindowCommand = new RelayCommands(ShowEditWindow, CanShowWindow);
             ShowSaveWindowCommand = new RelayCommands(ShowSaveWindow, CanShowWindow);
+            ShowLoadWindowCommand = new RelayCommands(ShowLoadWindow, CanShowWindow);
 
             SaveViewModel = new SaveVM(this);
+            LoadViewModel = new LoadVM(this);
         }
 
         private void ShowAddWindow(object obj)
@@ -57,6 +61,11 @@ namespace MyTaskManagerWPF.ViewModel
         private async void ShowSaveWindow(object obj)
         {
             await SaveViewModel.SaveTasksToFile();
+        }
+
+        private void ShowLoadWindow(object obj)
+        {
+            LoadViewModel.Load();
         }
 
         private bool CanShowWindow(object obj)

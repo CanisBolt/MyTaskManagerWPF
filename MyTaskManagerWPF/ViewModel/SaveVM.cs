@@ -45,7 +45,6 @@ namespace MyTaskManagerWPF.ViewModel
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JSON files (*.json)|*.json";
-            string saveName = "";
             if (saveFileDialog.ShowDialog() != true)
             {
                 MessageBox.Show(LocalizationManager.GetString("SaveCancelled"));
