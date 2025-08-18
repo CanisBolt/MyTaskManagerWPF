@@ -12,7 +12,7 @@ namespace MyTaskManagerWPF
     public static class LocalizationManager
     {
         private static readonly ResourceManager _resourceManager =
-            new ResourceManager("MyTaskManagerWPF.Resource", Assembly.GetExecutingAssembly());
+            new ResourceManager("MyTaskManagerWPF.Resources.Languages.Resource", Assembly.GetExecutingAssembly());
 
         public static string GetString(string name)
         {

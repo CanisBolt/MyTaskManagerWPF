@@ -8,23 +8,23 @@
         Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10">
-            <Button x:Name="btnAddTask" Command="{Binding ShowAddWindowCommand}" Content="Добавить задачу" Margin="0,5"/>
-            <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" CommandParameter="{Binding SelectedTask}" Content="Редактировать задачу" Margin="0,5"/>
-            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="0,5"/>
-            <Button x:Name="btnSave" Content="Сохранить" Command="{Binding ShowSaveWindowCommand}"/>
-            <Button x:Name="btnLoad" Content="Загрузить" Margin="0,5" Command="{Binding ShowLoadWindowCommand}"/>
-            
-            <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed">
+            <Button x:Name="btnAddTask" Command="{Binding ShowAddWindowCommand}" Content="Добавить задачу"  Margin="10"/>
+            <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" CommandParameter="{Binding SelectedTask}" Content="Редактировать задачу" Margin="10"/>
+            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="10"/>
+            <Button x:Name="btnSave" Content="Сохранить" Command="{Binding ShowSaveWindowCommand}" Margin="10"/>
+            <Button x:Name="btnLoad" Content="Загрузить" Margin="10" Command="{Binding ShowLoadWindowCommand}"/>
+
+            <ComboBox x:Name="cbLanguage" SelectionChanged="cbLanguage_DropDownClosed" Margin="10">
                 <ComboBoxItem Content="Русский" Tag="ru-RU" IsSelected="True"/>
                 <ComboBoxItem Content="English" Tag="en-US"/>
             </ComboBox>
         </StackPanel>
         <TabControl Grid.Column="1">
-            <TabItem Grid.Column="1">
+            <TabItem Grid.Column="1" >
                 <TabItem.Header>
                     <TextBlock Text="ActiveTasks"></TextBlock>
                 </TabItem.Header>
