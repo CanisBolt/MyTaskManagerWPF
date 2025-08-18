@@ -14,7 +14,7 @@
         <StackPanel Grid.Column="0" Margin="10">
             <Button x:Name="btnAddTask" Command="{Binding ShowAddWindowCommand}" Content="Добавить задачу"  Margin="10"/>
             <Button x:Name="btnEditTask" Command="{Binding ShowEditWindowCommand}" CommandParameter="{Binding SelectedTask}" Content="Редактировать задачу" Margin="10"/>
-            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="10"/>
+            <Button x:Name="btnDeleteTask" Content="Удалить задачу" Margin="10" Click="btnDeleteTask_Click"/>
             <Button x:Name="btnSave" Content="Сохранить" Command="{Binding ShowSaveWindowCommand}" Margin="10"/>
             <Button x:Name="btnLoad" Content="Загрузить" Margin="10" Command="{Binding ShowLoadWindowCommand}"/>
 

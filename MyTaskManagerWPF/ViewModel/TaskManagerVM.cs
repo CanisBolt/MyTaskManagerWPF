@@ -49,6 +49,7 @@ namespace MyTaskManagerWPF.ViewModel
 
         private void ShowEditWindow(object obj)
         {
+            // TODO MAKE IT WORK!!!
             if (obj is UserTask selectedTask)
             {
                 EditTaskVM editTaskVM = new EditTaskVM(selectedTask);
