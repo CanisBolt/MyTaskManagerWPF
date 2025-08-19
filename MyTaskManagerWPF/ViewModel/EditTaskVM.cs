@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyTaskManagerWPF.ViewModel
 {
     public class EditTaskVM
     {
-        private UserTask _originalTask;
+        public Action CloseAction { get; set; }
+        public UserTask originalTask;
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -20,7 +22,7 @@ namespace MyTaskManagerWPF.ViewModel
 
         public EditTaskVM(UserTask task)
         {
-            _originalTask = task;
+            originalTask = task;
 
             Name = task.Name;
             Description = task.Description;
@@ -31,9 +33,10 @@ namespace MyTaskManagerWPF.ViewModel
 
         private void EditTask(object obj)
         {
-            _originalTask.Name = Name;
-            _originalTask.Description = Description;
-            _originalTask.TaskPriority = UserTask.GetTaskPriority(TaskPriority);
+            TaskManagerData.RemoveActiveTask(originalTask);
+            TaskManagerData.AddActiveTask(new UserTask(Name, Description, DateTime.Now, UserTask.GetTaskPriority(TaskPriority)));
+
+            CloseAction?.Invoke();
         }
 
         private bool CanEditTask(object obj)

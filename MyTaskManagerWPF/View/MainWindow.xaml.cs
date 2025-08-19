@@ -56,10 +56,5 @@ namespace MyTaskManagerWPF.View
                 btnSave.Content = LocalizationManager.GetString("ButtonSave");
             }
         }
-
-        private void btnDeleteTask_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -21,9 +21,14 @@ namespace MyTaskManagerWPF.View
     /// </summary>
     public partial class EditTaskWindow : Window
     {
-        public EditTaskWindow()
+        public EditTaskWindow(UserTask task)
         {
             InitializeComponent();
+
+            var viewModel = new EditTaskVM(task);
+            viewModel.CloseAction = () => Close();
+
+            DataContext = viewModel;
         }
     }
 }
