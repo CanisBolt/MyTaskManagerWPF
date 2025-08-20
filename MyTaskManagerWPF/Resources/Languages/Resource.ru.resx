@@ -303,4 +303,7 @@
   <data name="ButtonCancel" xml:space="preserve">
     <value>Отменить</value>
   </data>
+  <data name="ButtonMarkAsComplete" xml:space="preserve">
+    <value>Выполнить</value>
+  </data>
 </root>

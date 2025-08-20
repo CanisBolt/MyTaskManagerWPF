@@ -54,6 +54,7 @@ namespace MyTaskManagerWPF.View
                 btnDeleteTask.Content = LocalizationManager.GetString("ButtonDeleteTask");
                 btnLoad.Content = LocalizationManager.GetString("ButtonLoad");
                 btnSave.Content = LocalizationManager.GetString("ButtonSave");
+                btnMarkASCompelted.Content = LocalizationManager.GetString("ButtonMarkAsComplete");
             }
         }
     }

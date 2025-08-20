@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyTaskManagerWPF.ViewModel
@@ -19,10 +20,12 @@ namespace MyTaskManagerWPF.ViewModel
         public ObservableCollection<UserTask> ActiveTasks { get; set; }
         public ObservableCollection<UserTask> ArchiveTasks { get; set; }
         public UserTask SelectedTask { get; set; }
+
         public ICommand ShowAddWindowCommand { get; set; }
         public ICommand ShowEditWindowCommand { get; set; }
         public ICommand ShowSaveWindowCommand { get; set; }
         public ICommand ShowLoadWindowCommand { get; set; }
+        public ICommand MarkAsCompleteCommand { get; set; }
 
         public SaveVM SaveViewModel { get; }
         public LoadVM LoadViewModel { get; }
@@ -36,6 +39,7 @@ namespace MyTaskManagerWPF.ViewModel
             ShowEditWindowCommand = new RelayCommands(ShowEditWindow, CanShowWindow);
             ShowSaveWindowCommand = new RelayCommands(ShowSaveWindow, CanShowWindow);
             ShowLoadWindowCommand = new RelayCommands(ShowLoadWindow, CanShowWindow);
+            MarkAsCompleteCommand = new RelayCommands(MarkAsComplete, CanMarkAsComplete);
 
             SaveViewModel = new SaveVM(this);
             LoadViewModel = new LoadVM(this);
@@ -67,6 +71,30 @@ namespace MyTaskManagerWPF.ViewModel
         }
 
         private bool CanShowWindow(object obj)
+        {
+            return true;
+        }
+
+        private void MarkAsComplete(object obj)
+        {
+            if (obj is UserTask selectedTask)
+            {
+                MessageBoxResult result = MessageBox.Show(LocalizationManager.GetString("MarkAsCompletedPrompt"), LocalizationManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    MessageBoxResult archive = MessageBox.Show(LocalizationManager.GetString("MoveToArchivePrompt"), LocalizationManager.GetString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (archive == MessageBoxResult.Yes)
+                    {
+                        MessageBox.Show(LocalizationManager.GetString("TaskCompletedAndArchived"));
+                        selectedTask.Completed = DateTime.Now;
+                        ArchiveTasks.Add(selectedTask);
+                    }
+                    ActiveTasks.Remove(selectedTask);
+                }
+            }
+        }
+
+        private bool CanMarkAsComplete(object obj)
         {
             return true;
         }
