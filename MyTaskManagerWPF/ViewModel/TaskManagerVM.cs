@@ -1,15 +1,7 @@
-﻿using Microsoft.Win32;
-using MyTaskManagerWPF.Commands;
+﻿using MyTaskManagerWPF.Commands;
 using MyTaskManagerWPF.Model;
 using MyTaskManagerWPF.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,6 +18,7 @@ namespace MyTaskManagerWPF.ViewModel
         public ICommand ShowSaveWindowCommand { get; set; }
         public ICommand ShowLoadWindowCommand { get; set; }
         public ICommand MarkAsCompleteCommand { get; set; }
+        public ICommand DeleteTaskCommand { get; set; }
 
         public SaveVM SaveViewModel { get; }
         public LoadVM LoadViewModel { get; }
@@ -40,6 +33,7 @@ namespace MyTaskManagerWPF.ViewModel
             ShowSaveWindowCommand = new RelayCommands(ShowSaveWindow, CanShowWindow);
             ShowLoadWindowCommand = new RelayCommands(ShowLoadWindow, CanShowWindow);
             MarkAsCompleteCommand = new RelayCommands(MarkAsComplete, CanMarkAsComplete);
+            DeleteTaskCommand = new RelayCommands(DeleteTask, CanDeleteTask);
 
             SaveViewModel = new SaveVM(this);
             LoadViewModel = new LoadVM(this);
@@ -95,6 +89,28 @@ namespace MyTaskManagerWPF.ViewModel
         }
 
         private bool CanMarkAsComplete(object obj)
+        {
+            return true;
+        }
+
+        private void DeleteTask(object obj)
+        {
+            if (SelectedTask == null)
+            {
+                return;
+            }
+            if (ActiveTasks.Contains(SelectedTask))
+            {
+                ActiveTasks.Remove(SelectedTask);
+            }
+            else if (ArchiveTasks.Contains(SelectedTask))
+            {
+                ArchiveTasks.Remove(SelectedTask);
+            }
+            MessageBox.Show(LocalizationManager.GetString("TaskSuccessfullyDeleted"));
+        }
+
+        private bool CanDeleteTask(object obj)
         {
             return true;
         }

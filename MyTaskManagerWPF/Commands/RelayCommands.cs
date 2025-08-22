@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace MyTaskManagerWPF.Commands
 {
@@ -13,7 +8,7 @@ namespace MyTaskManagerWPF.Commands
         private Action<object> executeAction { get; set; }
         private Predicate<object> canExecutePredicate { get; set; }
 
-        public RelayCommands(Action<object> _executeMethod, Predicate<object> _canExecuteMethod) 
+        public RelayCommands(Action<object> _executeMethod, Predicate<object> _canExecuteMethod)
         {
             executeAction = _executeMethod;
             canExecutePredicate = _canExecuteMethod;

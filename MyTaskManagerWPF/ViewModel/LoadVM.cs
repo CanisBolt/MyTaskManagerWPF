@@ -1,13 +1,8 @@
 ﻿using Microsoft.Win32;
 using MyTaskManagerWPF.Commands;
 using MyTaskManagerWPF.Model;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -28,17 +23,16 @@ namespace MyTaskManagerWPF.ViewModel
 
         private bool CanLoadTask(object obj)
         {
+            if (!Directory.Exists(SaveDirectory))
+            {
+                MessageBox.Show(LocalizationManager.GetString("ErrorSaveDirectoryNotFound"));
+                return false;
+            }
             return true;
         }
 
         public async Task Load()
         {
-            if (!Directory.Exists(SaveDirectory))
-            {
-                MessageBox.Show(LocalizationManager.GetString("ErrorSaveDirectoryNotFound"));
-                return;
-            }
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Path.GetFullPath(SaveDirectory);
             openFileDialog.Filter = "JSON files (*.json)|*.json";

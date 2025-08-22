@@ -1,17 +1,9 @@
 ﻿using Microsoft.Win32;
 using MyTaskManagerWPF.Commands;
-using MyTaskManagerWPF.Model;
-using MyTaskManagerWPF.View;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace MyTaskManagerWPF.ViewModel
 {

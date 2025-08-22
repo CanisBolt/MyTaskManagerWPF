@@ -35,5 +35,9 @@ namespace MyTaskManagerWPF.Model
         {
             ArchiveTasks.Add(task);
         }
+        public static void RemoveArchiveTask(UserTask task)
+        {
+            ArchiveTasks.Remove(task);
+        }
     }
 }
